@@ -1,9 +1,8 @@
-import board
-import disc
+import board, disc, player, situation
 
 
 wd = disc.Disc("⚪️")
-wd.color
+color = wd.color
 bd = disc.Disc("⚫️")
 bd.color
 
@@ -16,3 +15,5 @@ test.row[5][5] = wd.color
 for i in range(len(test.row)):
     print(*test.row[i])
 
+player1 = player.Player()
+player1.move(input(), color)
