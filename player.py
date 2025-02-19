@@ -1,8 +1,8 @@
-class Player():
+class Player:
+
     def __init__(self):
         pass
 
-    def move(input, color):
-        print(input, color)
-
-    
+    def move(self, x, y, color, board):
+        board.row[x][y] = color
+        return board

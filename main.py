@@ -1,19 +1,36 @@
-import board, disc, player, situation
+from board import Board
+from disc import Disc
+from player import Player
+from situation import Situation
 
-
-wd = disc.Disc("⚪️")
-color = wd.color
-bd = disc.Disc("⚫️")
+board = Board()
+rows = board.row  # 座標を示す
+wd = Disc("⚪️")
+wd.color
+bd = Disc("⚫️")
 bd.color
 
-test = board.Board()
-test.row[4][4] = wd.color
-test.row[4][5] = bd.color
-test.row[5][4] = bd.color
-test.row[5][5] = wd.color
+situ = Situation()
+player1 = Player()
 
-for i in range(len(test.row)):
-    print(*test.row[i])
 
-player1 = player.Player()
-player1.move(input(), color)
+def main():
+    print(situ.turn_count)
+    print(situ.board)
+
+    color = wd.color
+
+    refreshed_board = player1.move(1, 1, color, board)
+
+    for i in range(len(rows)):
+        print(*rows[i])
+
+    situ.turn_count += 1
+    situ.reflesh_board(refreshed_board)
+
+    for i in range(len(rows)):
+        print(*situ.board.row[i])
+
+
+if __name__ == "__main__":
+    main()

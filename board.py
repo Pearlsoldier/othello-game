@@ -1,4 +1,10 @@
+from disc import Disc
 import string
+
+wd = Disc("⚪️")
+wd.color
+bd = Disc("⚫️")
+bd.color
 
 uppercase_letter = list(string.ascii_uppercase)
 line = uppercase_letter[0:8]
@@ -35,5 +41,10 @@ class Board:
         self.row[0] = zero_line
         self.row[9] = zero_line
 
-        for _ in self.row:
-            self.row
+        self.row[4][4] = wd.color
+        self.row[4][5] = bd.color
+        self.row[5][4] = bd.color
+        self.row[5][5] = wd.color
+
+        for i in range(len(self.row)):
+            print(*self.row[i])
