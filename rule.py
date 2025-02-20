@@ -2,7 +2,7 @@ class Rule:
     def __init__(self):
         pass
 
-    def is_legal_cell(self, x: int, y: int, board):
+    def is_legal_cell(self, x: int, y: int, board) -> bool:
         """
         石が置ける有効な手なのかを判定
         - の上のみに置く
@@ -11,10 +11,7 @@ class Rule:
         False:別のマスを指定してください。とアナウンス。
         もう1度標準入力に。
         """
-        if board.row[x][y] == "-":
-            return True
-        else:
-            return False
+        return board.row[x][y] == "-"
 
     def flip_line(self):
         """

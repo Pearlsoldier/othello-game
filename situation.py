@@ -1,4 +1,5 @@
 class Situation:
+    
     """
     盤面の情報を持つクラス(list)
     ターン情報(int)：何ターン目か
@@ -8,17 +9,17 @@ class Situation:
     def __init__(self):
         self.turn_count = 0
         self.board = []
+        self.ALP_NUM_MAP = {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6, "g": 7, "h": 8}
 
-    def reflesh_board(self, refleshed_board):
-        self.board = refleshed_board
+    def refresh_board(self, refreshed_board):
+        self.board = refreshed_board
 
     def put_disc(self, cell):
         self.disc_move = cell
-        splited_row = self.disc_move.split()
-        str_x = splited_row[0]
-        alp_num_map = {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6, "g": 7, "h": 8}
-        x = alp_num_map[str_x]
-        str_y = splited_row[1]
+        splitted_row = self.disc_move.split()
+        str_x = splitted_row[0]
+        x = self.ALP_NUM_MAP[str_x]
+        str_y = splitted_row[1]
         y = int(str_y)
 
         return x, y
