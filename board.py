@@ -45,6 +45,3 @@ class Board:
         self.row[4][5] = bd.color
         self.row[5][4] = bd.color
         self.row[5][5] = wd.color
-
-        for i in range(len(self.row)):
-            print(*self.row[i])
