@@ -31,21 +31,21 @@ def main():
             print(f"後手,{color}。")
 
         x, y = situ.put_disc(input())
-        is_legal = rules.is_legal_cell(x, y, board)
+        is_legal = rules.is_legal_cell(x, y, board, color)
         if is_legal:
             refreshed_board = player.move(x, y, color, board)
             situ.refresh_board(refreshed_board)
             for i in range(len(rows)):
                 print(*rows[i])
         else:
-            while is_legal == False:
+            while not is_legal:
                 print(f"❌手 {x, y} は石を置けません❌")
                 print("もう一度入力してください！！")
                 for i in range(len(rows)):
                     print(*rows[i])
                 x, y = situ.put_disc(input())
-                is_legal = rules.is_legal_cell(x, y, board)
-                if is_legal == True:
+                is_legal = rules.is_legal_cell(x, y, board, color)
+                if is_legal:
                     print(f"🙆手 {x, y} は有効です🙆")
                     refreshed_board = player.move(x, y, color, board)
                     situ.refresh_board(refreshed_board)
