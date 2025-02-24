@@ -12,6 +12,22 @@ class Rule:
         もう1度標準入力に。
         """
         return board.row[x][y] == "-"
+        # if (
+        #     (not board.row[x][y - 1] == color)
+        #     and (not board.row[x][y - 1] == "-")
+        #     or (not board.row[x + 1][y - 1] == color)
+        #     and (not board.row[x + 1][y - 1] == "-")
+        #     or (not board.row[x][y + 1] == color)
+        #     and (not board.row[x][y + 1] == "-")
+        #     or (not board.row[x + 1][y + 1] == color)
+        #     and (not board.row[x + 1][y + 1] == "-")
+        #     or (not board.row[x + 1][y] == color)
+        #     and (not board.row[x + 1][y] == "-")
+        #     or (not board.row[x - 1][y] == color)
+        #     and (not board.row[x - 1][y] == "-")
+        #     or (not board.row[x - 1][y - 1] == color)
+        #     and (not board.row[x - 1][y - 1] == "-")
+        # ):
 
     def flip_line(self):
         """
@@ -21,3 +37,6 @@ class Rule:
         この返り値はどのように考えたらいいのか？)
         """
         pass
+
+    def is_adjacent_cells_filled(self, x: int, y: int, board, color) -> bool:
+        return not (board.row[x + 1][y] == color)
