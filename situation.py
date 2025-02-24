@@ -30,7 +30,6 @@ class Situation:
         row = self.alp_num_map[str_x]
         str_y = splitted_row[1]
         column = int(str_y)
-        print(f"put_x🩵: {row}")
 
         return row, column
 
