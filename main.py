@@ -22,7 +22,6 @@ def main():
         print(*rows[i])
     for i in range(1, 61):
         situ.turn_count += 1
-        print(f"ターンカウント: {situ.turn_count}")
         if situ.is_black_turn:
             color = bd.color
             print(f"先手,{color}。")
@@ -34,7 +33,7 @@ def main():
         is_legal = rules.is_legal_cell(x, y, board, color)
         if is_legal:
             refreshed_board = player.move(x, y, color, board)
-            situ.refresh_board(refreshed_board)
+            situ.reflesh_board(refreshed_board)
             for i in range(len(rows)):
                 print(*rows[i])
         else:
@@ -48,7 +47,7 @@ def main():
                 if is_legal:
                     print(f"🙆手 {x, y} は有効です🙆")
                     refreshed_board = player.move(x, y, color, board)
-                    situ.refresh_board(refreshed_board)
+                    situ.reflesh_board(refreshed_board)
                     for i in range(len(rows)):
                         print(*rows[i])
                     continue
