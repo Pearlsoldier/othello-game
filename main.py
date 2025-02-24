@@ -32,7 +32,6 @@ def main():
         row, column = situ.put_disc(input())
         print(row, column)
         is_legal = rules.is_legal_cell(row, column, board)
-        print(f"cslls🩷: {is_legal}")
         if is_legal:
             is_legal = rules.is_adjacent_cells_filled(row, column, board, color)
             if is_legal:
