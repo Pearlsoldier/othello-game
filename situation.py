@@ -25,14 +25,14 @@ class Situation:
     def put_disc(self, cell):
         self.disc_move = cell
         splitted_row = self.disc_move.split()
+        print(f"splitted_row :{splitted_row}")
         str_x = splitted_row[0]
-        x = self.alp_num_map[str_x]
-        print(f"x: {x}")
+        row = self.alp_num_map[str_x]
         str_y = splitted_row[1]
-        y = int(str_y)
-        print(f"y: {y}")
+        column = int(str_y)
+        print(f"put_x🩵: {row}")
 
-        return x, y
+        return row, column
 
     @property
     def is_black_turn(self) -> bool:

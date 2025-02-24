@@ -29,24 +29,50 @@ def main():
             color = wd.color
             print(f"後手,{color}。")
 
-        x, y = situ.put_disc(input())
-        is_legal = rules.is_legal_cell(x, y, board, color)
+        row, column = situ.put_disc(input())
+        print(row, column)
+        is_legal = rules.is_legal_cell(row, column, board)
+        print(f"cslls🩷: {is_legal}")
         if is_legal:
-            refreshed_board = player.move(x, y, color, board)
-            situ.reflesh_board(refreshed_board)
-            for i in range(len(rows)):
-                print(*rows[i])
+            is_legal = rules.is_adjacent_cells_filled(row, column, board, color)
+            if is_legal:
+                refreshed_board = player.move(row, column, color, board)
+                situ.reflesh_board(refreshed_board)
+                for i in range(len(rows)):
+                    print(*rows[i])
+            else:
+                while not is_legal:
+                    print(f"❌手 {row, column} は石を置けません❌")
+                    print("もう一度入力してください！！")
+                    for i in range(len(rows)):
+                        print(*rows[i])
+                    row, column = situ.put_disc(input())
+                    if rules.is_legal_cell(row, column, board):
+                        is_legal = rules.is_adjacent_cells_filled(
+                            row, column, board, color
+                        )
+                    print(f"ac :{is_legal}")
+                    if is_legal:
+                        print(f"🙆手 {row, column} は有効です🙆")
+                        refreshed_board = player.move(row, column, color, board)
+                        situ.reflesh_board(refreshed_board)
+                        for i in range(len(rows)):
+                            print(*rows[i])
+                        continue
+
         else:
             while not is_legal:
-                print(f"❌手 {x, y} は石を置けません❌")
+                print(f"❌手 {row, column} は石を置けません❌")
                 print("もう一度入力してください！！")
                 for i in range(len(rows)):
                     print(*rows[i])
-                x, y = situ.put_disc(input())
-                is_legal = rules.is_legal_cell(x, y, board, color)
+                row, column = situ.put_disc(input())
+                if rules.is_legal_cell(row, column, board):
+                    is_legal = rules.is_adjacent_cells_filled(row, column, board, color)
+                print(f"ac :{is_legal}")
                 if is_legal:
-                    print(f"🙆手 {x, y} は有効です🙆")
-                    refreshed_board = player.move(x, y, color, board)
+                    print(f"🙆手 {row, column} は有効です🙆")
+                    refreshed_board = player.move(row, column, color, board)
                     situ.reflesh_board(refreshed_board)
                     for i in range(len(rows)):
                         print(*rows[i])
