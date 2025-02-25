@@ -16,43 +16,27 @@ class Rule:
         if board.row[row][column] == "-":
             return True
 
-
-
-    def is_adjacent_cells_filled(self, row: int, column: int, board, color) -> bool:
+    def is_adjacent_cells_filled(
+        self, row: int, column: int, board, opposite_color
+    ) -> bool:
+        """
+        2.置いた隣に相手の色の石がある事。
+        """
         if (
-            not (board.row[column][row - 1] == color)
-            or not (board.row[column + 1][row - 1] == color)
-            or not (board.row[column + 1][row] == color)
-            or not (board.row[column + 1][row + 1] == color)
-            or not (board.row[column][row + 1] == color)
-            or not (board.row[column - 1][row + 1] == color)
-            or not (board.row[column - 1][row] == color)
-            or not (board.row[column - 1][row - 1] == color)
+            (board.row[column][row - 1] == opposite_color)
+            or (board.row[column + 1][row - 1] == opposite_color)
+            or (board.row[column + 1][row] == opposite_color)
+            or (board.row[column + 1][row + 1] == opposite_color)
+            or (board.row[column][row + 1] == opposite_color)
+            or (board.row[column - 1][row + 1] == opposite_color)
+            or (board.row[column - 1][row] == opposite_color)
+            or (board.row[column - 1][row - 1] == opposite_color)
         ):
-            if (
-                not (board.row[column][row - 1] == "-")
-                or not (board.row[column + 1][row - 1] == "-")
-                or not (board.row[column + 1][row] == "-")
-                or not (board.row[column + 1][row + 1] == "-")
-                or not (board.row[column][row + 1] == "-")
-                or not (board.row[column - 1][row + 1] == "-")
-                or not (board.row[column - 1][row] == "-")
-                or not (board.row[column - 1][row - 1] == "-")
-            ):
-                return True
-            else:
-                return False
+            return True
         else:
             return False
 
-            """
-            2.隣に自分ではない色があること。
-            """
-            return  not ((board.row[column][row] == color) and (board.row[i][row] == "-"))
-            
-
-
-    def is_valid_flank_capture(self, row: int, column: int, board, color) -> bool:
+    def is_valid_flank_capture(self, row: int, column: int, board, current_color, opposite_color) -> bool:
         """
         1方向に対して挟み込み捕獲が有効かどうかの判定
         行（列）末まで確認する。
@@ -61,4 +45,3 @@ class Rule:
         途中で - があれば、判定はFalseになる。
         """
         pass
-        
