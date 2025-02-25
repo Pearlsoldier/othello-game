@@ -31,10 +31,12 @@ def main():
             print(f"後手,{current_color}。")
 
         row, column = situ.put_disc(input())
-        print(row, column)
         is_legal = rules.is_legal_cell(row, column, board)
+
         if is_legal:
-            is_legal = rules.is_adjacent_cells_filled(row, column, board, current_color)
+            is_legal = rules.is_adjacent_cells_filled(
+                row, column, board, color
+                )
             if is_legal:
                 refreshed_board = player.move(row, column, current_color, board)
                 situ.reflesh_board(refreshed_board)
