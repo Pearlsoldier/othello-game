@@ -41,7 +41,37 @@ class Board:
         self.row[0] = zero_line
         self.row[9] = zero_line
 
+        self.row[4][3] = wd.color
         self.row[4][4] = wd.color
-        self.row[4][5] = bd.color
-        self.row[5][4] = bd.color
+        self.row[4][5] = wd.color
+        self.row[6][3] = wd.color
+        self.row[6][4] = wd.color
+        self.row[6][5] = wd.color
+        self.row[5][3] = wd.color
         self.row[5][5] = wd.color
+
+        self.row[3][3] = bd.color
+        self.row[3][4] = bd.color
+        self.row[3][5] = bd.color
+        self.row[3][3] = bd.color
+        self.row[3][2] = bd.color
+        self.row[3][6] = bd.color
+
+        self.row[7][3] = bd.color
+        self.row[7][4] = bd.color
+        self.row[7][5] = bd.color
+        self.row[7][3] = bd.color
+        self.row[7][2] = bd.color
+        self.row[7][6] = bd.color
+
+        self.row[4][2] = bd.color
+        self.row[5][2] = bd.color
+        self.row[6][2] = bd.color
+
+        self.row[4][6] = bd.color
+        self.row[5][6] = bd.color
+        self.row[6][6] = bd.color
+      
+
+        
+       

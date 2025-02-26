@@ -36,12 +36,17 @@ class Rule:
         else:
             return False
 
-    def is_valid_flank_capture(self, row: int, column: int, board, current_color, opposite_color) -> bool:
-        """
-        1方向に対して挟み込み捕獲が有効かどうかの判定
-        行（列）末まで確認する。
-        置いた位置から、石が連続しているか
-        最後の石が自分の石か
-        途中で - があれば、判定はFalseになる。
-        """
-        pass
+    def is_valid_flank_capture_directly_above(self, row: int, column: int, board, current_color, opposite_color) -> bool:
+        return (board.row[row - 1][column] == opposite_color) and (board.row[row - 2][column] == current_color)
+    
+    def is_valid_flank_capture_right(self, row: int, column: int, board, current_color, opposite_color) -> bool:
+        return (board.row[row][column + 1] == opposite_color) and (board.row[row][column + 2] == current_color)
+    
+    def is_valid_flank_capture_directly_below(self, row: int, column: int, board, current_color, opposite_color) -> bool:
+        return (board.row[row + 1][column] == opposite_color) and (board.row[row + 2][column] == current_color)
+    
+    def is_valid_flank_capture_left(self, row: int, column: int, board, current_color, opposite_color) -> bool:
+        return (board.row[row][column - 1] == opposite_color) and (board.row[row][column - 2] == current_color)
+
+
+        
