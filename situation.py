@@ -25,7 +25,6 @@ class Situation:
     def put_disc(self, cell):
         self.disc_move = cell
         splitted_row = self.disc_move.split()
-        print(f"splitted_row :{splitted_row}")
         str_x = splitted_row[0]
         row = self.alp_num_map[str_x]
         str_y = splitted_row[1]

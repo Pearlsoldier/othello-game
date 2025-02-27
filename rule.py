@@ -8,45 +8,124 @@ class Rule:
         """
         pass
 
-    def is_legal_cell(self, row: int, column: int, board) -> bool:
-        """
-        1.-であること
-        石が置けるブランク状態かの判定
-        """
-        if board.row[row][column] == "-":
-            return True
+    def is_legal_cell(self, row, column, board, opposite_color, current_color) -> bool:
+        # 空欄か？
+        if not board.row[row][column] == "-":
+            return False
+
+        # 空欄じゃないなら、隣に石はあるか？
+        if not self.is_adjacent_cells_filled(row, column, board, opposite_color, current_color):
+            print("🩷")
+            return False
+        print("爆発")
+
+        # 挟み込めているか？
+        return self.is_captured(row, column, board, opposite_color, current_color)
 
     def is_adjacent_cells_filled(
-        self, row: int, column: int, board, opposite_color
+        self, row, column, board, opposite_color, current_color
     ) -> bool:
         """
         2.置いた隣に相手の色の石がある事。
         """
-        if (
-            (board.row[column][row - 1] == opposite_color)
-            or (board.row[column + 1][row - 1] == opposite_color)
-            or (board.row[column + 1][row] == opposite_color)
-            or (board.row[column + 1][row + 1] == opposite_color)
-            or (board.row[column][row + 1] == opposite_color)
-            or (board.row[column - 1][row + 1] == opposite_color)
-            or (board.row[column - 1][row] == opposite_color)
-            or (board.row[column - 1][row - 1] == opposite_color)
-        ):
-            return True
-        else:
-            return False
 
-    def is_valid_flank_capture_directly_above(self, row: int, column: int, board, current_color, opposite_color) -> bool:
-        return (board.row[row - 1][column] == opposite_color) and (board.row[row - 2][column] == current_color)
-    
-    def is_valid_flank_capture_right(self, row: int, column: int, board, current_color, opposite_color) -> bool:
-        return (board.row[row][column + 1] == opposite_color) and (board.row[row][column + 2] == current_color)
-    
-    def is_valid_flank_capture_directly_below(self, row: int, column: int, board, current_color, opposite_color) -> bool:
-        return (board.row[row + 1][column] == opposite_color) and (board.row[row + 2][column] == current_color)
-    
-    def is_valid_flank_capture_left(self, row: int, column: int, board, current_color, opposite_color) -> bool:
-        return (board.row[row][column - 1] == opposite_color) and (board.row[row][column - 2] == current_color)
+        omnidirectional_search = [
+            (board.row[column][row - 1] == opposite_color),
+            (board.row[column + 1][row - 1] == opposite_color),
+            (board.row[column + 1][row] == opposite_color),
+            (board.row[column + 1][row + 1] == opposite_color),
+            (board.row[column][row + 1] == opposite_color),
+            (board.row[column - 1][row + 1] == opposite_color),
+            (board.row[column - 1][row] == opposite_color),
+            (board.row[column - 1][row - 1] == opposite_color),
+        ]
+        return any(omnidirectional_search)
 
+    def is_flippable_line_directly_above(
+        self, row: int, column: int, board, opposite_color, current_color
+    ) -> bool:
+        """
+        True
+        真上に相手の石であるとき
+        False
+        真上に相手の石以外のとき
+        """
+        i = 1
+        while board.row[row - i][column] == opposite_color:
+            i += 1
+        return board.row[row - i][column] == current_color
 
-        
+    def is_flippable_line_right(
+        self, row: int, column: int, board, opposite_color, current_color
+    ) -> bool:
+        i = 1
+        while board.row[row][column + i] == opposite_color:
+            i += 1
+        return board.row[row][column + i] == current_color
+
+    def is_flippable_line_directly_below(
+        self, row: int, column: int, board, opposite_color, current_color
+    ) -> bool:
+        i = 1
+        while board.row[row + i][column] == opposite_color:
+            i += 1
+        return board.row[row + i][column] == current_color
+
+    def is_flippable_line_left(
+        self, row: int, column: int, board, opposite_color, current_color
+    ) -> bool:
+        i = 1
+        while board.row[row][column - i] == opposite_color:
+            i += 1
+        return board.row[row][column - i] == current_color
+
+    def is_flippable_line_lower_right(
+        self, row: int, column: int, board, opposite_color, current_color
+    ) -> bool:
+        i = 1
+        while board.row[row + i][column + i] == opposite_color:
+            print(board.row[row + i][column + i])
+            i += 1
+        return board.row[row + i][column + i] == current_color
+
+    def is_flippable_line_upper_left(
+        self, row: int, column: int, board, opposite_color, current_color
+    ) -> bool:
+
+        i = 1
+        while board.row[row - i][column - i] == opposite_color:
+            print(board.row[row - i][column - i])
+            i += 1
+        return board.row[row - i][column - i] == current_color
+
+    def is_flippable_line_upper_right(
+        self, row: int, column: int, board, opposite_color, current_color
+    ) -> bool:
+
+        i = 1
+        while board.row[row - i][column + i] == opposite_color:
+            print(board.row[row - i][column + i])
+            i += 1
+        return board.row[row - i][column + i] == current_color
+
+    def is_flippable_line_lower_left(
+        self, row: int, column: int, board, opposite_color, current_color
+    ) -> bool:
+
+        i = 1
+        while board.row[row + i][column - i] == opposite_color:
+            print(board.row[row + i][column - i])
+            i += 1
+        return board.row[row + i][column - i] == current_color
+    
+    def is_captured(self, row, column, board, opposite_color, current_color) -> bool:
+        return any([
+                    (self.is_flippable_line_directly_above(row, column, board, opposite_color, current_color)),
+                    (self.is_flippable_line_upper_right(row, column, board, opposite_color, current_color)),
+                    (self.is_flippable_line_right(row, column, board, opposite_color, current_color)),
+                    (self.is_flippable_line_lower_right(row, column, board, opposite_color, current_color)),
+                    (self.is_flippable_line_directly_below(row, column, board, opposite_color, current_color)),
+                    (self.is_flippable_line_lower_left(row, column, board, opposite_color, current_color)),
+                    (self.is_flippable_line_left(row, column, board, opposite_color, current_color)),
+                    (self.is_flippable_line_upper_left(row, column, board, opposite_color, current_color))
+                ] )

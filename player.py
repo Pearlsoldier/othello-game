@@ -7,18 +7,68 @@ class Player:
         board.row[row][column] = current_color
         return board
     
-    def flip_turn_directly_above(self, column, row, board, current_color):
-        board.row[row - 1][column] = current_color
+    def omnidirectional_flip(self, column, row, board, current_color, opposite_color):
+        self.flip_turn_directly_above(column, row, board, current_color, opposite_color),
+        self.flip_turn_directly_below(column, row, board, current_color, opposite_color),
+        self.flip_turn_left(column, row, board, current_color, opposite_color),
+        self.flip_turn_lower_left(column, row, board, current_color, opposite_color),
+        self.flip_turn_lower_right(column, row, board, current_color, opposite_color),
+        self.flip_turn_right(column, row, board, current_color, opposite_color),
+        self.flip_turn_upper_left(column, row, board, current_color, opposite_color),
+        self.flip_turn_upper_righ(column, row, board, current_color, opposite_color),
+
+    def flip_turn_directly_above(self, column, row, board, current_color, opposite_color):
+        i = 1
+        while board.row[row - i][column] == opposite_color:
+            board.row[row - i][column] = current_color
+            i += 1
         return board
     
-    def flip_turn_right(self, column, row, board, current_color):
-        board.row[row][column + 1] = current_color
+    def flip_turn_right(self, column, row, board, current_color, opposite_color):
+        i = 1
+        while board.row[row][column + i] == opposite_color:
+            board.row[row][column + i] = current_color
+            i += 1
         return board
     
-    def flip_turn__directly_below(self, column, row, board, current_color):
-        board.row[row + 1][column] = current_color
+    def flip_turn_directly_below(self, column, row, board, current_color, opposite_color):
+        i = 1
+        while board.row[row + i][column] == opposite_color:
+            board.row[row + i][column] = current_color
+            i += 1
         return board
     
-    def flip_turn_left(self, column, row, board, current_color):
-        board.row[row][column - 1] = current_color
+    def flip_turn_left(self, column, row, board, current_color, opposite_color):
+        i = 1
+        while board.row[row][column - i] == opposite_color:
+            board.row[row][column - i] = current_color
+            i += 1
+        return board
+    
+    def flip_turn_lower_right(self, column, row, board, current_color, opposite_color):
+        i = 1
+        while board.row[row + i][column + i] == opposite_color:
+            board.row[row + i][column + i] = current_color
+            i += 1
+        return board
+    
+    def flip_turn_upper_left(self, column, row, board, current_color, opposite_color):
+        i = 1
+        while board.row[row - i][column - i] == opposite_color:
+            board.row[row - i][column - i] = current_color
+            i += 1
+        return board
+    
+    def flip_turn_upper_righ(self, column, row, board, current_color, opposite_color):
+        i = 1
+        while board.row[row - i][column + i] == opposite_color:
+            board.row[row - i][column + i] = current_color
+            i += 1
+        return board
+    
+    def flip_turn_lower_left(self, column, row, board, current_color, opposite_color):
+        i = 1
+        while board.row[row + i][column - i] == opposite_color:
+            print(board.row[row + i][column - i])
+            i += 1
         return board
