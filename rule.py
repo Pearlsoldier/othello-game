@@ -15,9 +15,7 @@ class Rule:
 
         # 空欄じゃないなら、隣に石はあるか？
         if not self.is_adjacent_cells_filled(row, column, board, opposite_color, current_color):
-            print("🩷")
             return False
-        print("爆発")
 
         # 挟み込めているか？
         return self.is_captured(row, column, board, opposite_color, current_color)
