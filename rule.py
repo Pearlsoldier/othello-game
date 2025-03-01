@@ -13,31 +13,8 @@ class Rule:
         if not board.row[row][column] == "-":
             return False
 
-        # 空欄じゃないなら、隣に石はあるか？
-        if not self.is_adjacent_cells_filled(row, column, board, opposite_color, current_color):
-            return False
-
         # 挟み込めているか？
         return self.is_captured(row, column, board, opposite_color, current_color)
-
-    def is_adjacent_cells_filled(
-        self, row, column, board, opposite_color, current_color
-    ) -> bool:
-        """
-        2.置いた隣に相手の色の石がある事。
-        """
-
-        omnidirectional_search = [
-            (board.row[column][row - 1] == opposite_color),
-            (board.row[column + 1][row - 1] == opposite_color),
-            (board.row[column + 1][row] == opposite_color),
-            (board.row[column + 1][row + 1] == opposite_color),
-            (board.row[column][row + 1] == opposite_color),
-            (board.row[column - 1][row + 1] == opposite_color),
-            (board.row[column - 1][row] == opposite_color),
-            (board.row[column - 1][row - 1] == opposite_color),
-        ]
-        return any(omnidirectional_search)
 
     def is_flippable_line_directly_above(
         self, row: int, column: int, board, opposite_color, current_color
@@ -59,6 +36,8 @@ class Rule:
         i = 1
         while board.row[row][column + i] == opposite_color:
             i += 1
+            print(f"while_i: {i}")
+        print(f"i: {i}")
         return board.row[row][column + i] == current_color
 
     def is_flippable_line_directly_below(
@@ -126,4 +105,4 @@ class Rule:
                     (self.is_flippable_line_lower_left(row, column, board, opposite_color, current_color)),
                     (self.is_flippable_line_left(row, column, board, opposite_color, current_color)),
                     (self.is_flippable_line_upper_left(row, column, board, opposite_color, current_color))
-                ] )
+                ])

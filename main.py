@@ -19,11 +19,11 @@ def main():
     for i in range(len(rows)):
         print(*rows[i])
     print("======================")
-    while situ.turn_count < 64:
+    while situ.turn_count < 61:
         situ.turn_count += 1
         if situ.is_black_turn:
-            current_color = bd.color  # 現在の色
-            opposite_color = wd.color  # 相手（反対）の色
+            current_color = bd.color 
+            opposite_color = wd.color
             print(f"先手,{current_color}。")
         else:
             current_color = wd.color
@@ -31,6 +31,7 @@ def main():
             print(f"後手,{current_color}。")
 
         column, row = situ.put_disc(input())
+        print(rules.is_flippable_line_right(row, column, board, opposite_color, current_color))
         if rules.is_legal_cell(row, column, board, opposite_color, current_color):
             refreshed_board = player.move(
                 column=column, row=row, current_color=current_color, board=board
@@ -50,8 +51,6 @@ def main():
             for i in range(len(rows)):
                 print(*rows[i])
             print("======================")
-
-
         else:
             while not rules.is_legal_cell(
                 row, column, board, opposite_color, current_color
@@ -80,7 +79,6 @@ def main():
             for i in range(len(rows)):
                 print(*rows[i])
             print("======================")
-            continue
     print("ゲーム終了")
 
 

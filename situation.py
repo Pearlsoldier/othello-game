@@ -29,7 +29,6 @@ class Situation:
         row = self.alp_num_map[str_x]
         str_y = splitted_row[1]
         column = int(str_y)
-
         return row, column
 
     @property
