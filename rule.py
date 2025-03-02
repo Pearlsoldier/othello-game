@@ -28,7 +28,11 @@ class Rule:
         i = 1
         while board.row[row - i][column] == opposite_color:
             i += 1
-        return board.row[row - i][column] == current_color
+            if board.row[row - i][column] == current_color:
+                return board.row[row - i][column] == current_color
+        else:
+            return False
+
 
     def is_flippable_line_right(
         self, row: int, column: int, board, opposite_color, current_color
@@ -36,9 +40,11 @@ class Rule:
         i = 1
         while board.row[row][column + i] == opposite_color:
             i += 1
-            print(f"while_i: {i}")
-        print(f"i: {i}")
-        return board.row[row][column + i] == current_color
+            if board.row[row][column + i] == current_color:
+                return board.row[row][column + i] == current_color
+        else:
+            return False
+    
 
     def is_flippable_line_directly_below(
         self, row: int, column: int, board, opposite_color, current_color
@@ -46,7 +52,11 @@ class Rule:
         i = 1
         while board.row[row + i][column] == opposite_color:
             i += 1
-        return board.row[row + i][column] == current_color
+            if board.row[row + i][column] == current_color:
+                return board.row[row + i][column] == current_color
+        else:
+            return False
+
 
     def is_flippable_line_left(
         self, row: int, column: int, board, opposite_color, current_color
@@ -54,16 +64,22 @@ class Rule:
         i = 1
         while board.row[row][column - i] == opposite_color:
             i += 1
-        return board.row[row][column - i] == current_color
+            if board.row[row][column - i] == current_color:
+                return board.row[row][column - i] == current_color
+        else:
+            return False
+
 
     def is_flippable_line_lower_right(
         self, row: int, column: int, board, opposite_color, current_color
     ) -> bool:
         i = 1
         while board.row[row + i][column + i] == opposite_color:
-            print(board.row[row + i][column + i])
             i += 1
-        return board.row[row + i][column + i] == current_color
+            if board.row[row + i][column + i] == current_color:
+                return board.row[row + i][column + i] == current_color
+        else:
+            return False
 
     def is_flippable_line_upper_left(
         self, row: int, column: int, board, opposite_color, current_color
@@ -71,9 +87,11 @@ class Rule:
 
         i = 1
         while board.row[row - i][column - i] == opposite_color:
-            print(board.row[row - i][column - i])
             i += 1
-        return board.row[row - i][column - i] == current_color
+            if board.row[row - i][column - i] == current_color:
+                return board.row[row - i][column - i] == current_color
+        else:
+            return False
 
     def is_flippable_line_upper_right(
         self, row: int, column: int, board, opposite_color, current_color
@@ -81,9 +99,11 @@ class Rule:
 
         i = 1
         while board.row[row - i][column + i] == opposite_color:
-            print(board.row[row - i][column + i])
             i += 1
-        return board.row[row - i][column + i] == current_color
+            if board.row[row - i][column + i] == current_color:
+                return board.row[row - i][column + i] == current_color
+        else:
+            return False
 
     def is_flippable_line_lower_left(
         self, row: int, column: int, board, opposite_color, current_color
@@ -91,9 +111,11 @@ class Rule:
 
         i = 1
         while board.row[row + i][column - i] == opposite_color:
-            print(board.row[row + i][column - i])
             i += 1
-        return board.row[row + i][column - i] == current_color
+            if board.row[row + i][column - i] == current_color:
+                return board.row[row + i][column - i] == current_color
+        else:
+            return False
     
     def is_captured(self, row, column, board, opposite_color, current_color) -> bool:
         return any([

@@ -42,10 +42,7 @@ class Board:
         self.row[9] = zero_line
 
         self.row[4][4] = bd.color
+        self.row[5][5] = bd.color
         self.row[4][5] = wd.color
         self.row[5][4] = wd.color
-        self.row[5][5] = bd.color
-    
 
-        
-       
