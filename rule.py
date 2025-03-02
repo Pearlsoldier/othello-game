@@ -1,5 +1,3 @@
-from board import Board
-
 class Rule:
     def __init__(self):
         """
@@ -35,7 +33,6 @@ class Rule:
         else:
             return False
 
-
     def is_flippable_line_right(
         self, row: int, column: int, board, opposite_color, current_color
     ) -> bool:
@@ -46,7 +43,6 @@ class Rule:
                 return board.row[row][column + i] == current_color
         else:
             return False
-    
 
     def is_flippable_line_directly_below(
         self, row: int, column: int, board, opposite_color, current_color
@@ -59,7 +55,6 @@ class Rule:
         else:
             return False
 
-
     def is_flippable_line_left(
         self, row: int, column: int, board, opposite_color, current_color
     ) -> bool:
@@ -70,7 +65,6 @@ class Rule:
                 return board.row[row][column - i] == current_color
         else:
             return False
-
 
     def is_flippable_line_lower_right(
         self, row: int, column: int, board, opposite_color, current_color
@@ -118,21 +112,52 @@ class Rule:
                 return board.row[row + i][column - i] == current_color
         else:
             return False
-    
+
     def is_captured(self, row, column, board, opposite_color, current_color) -> bool:
-        return any([
-                    (self.is_flippable_line_directly_above(row, column, board, opposite_color, current_color)),
-                    (self.is_flippable_line_upper_right(row, column, board, opposite_color, current_color)),
-                    (self.is_flippable_line_right(row, column, board, opposite_color, current_color)),
-                    (self.is_flippable_line_lower_right(row, column, board, opposite_color, current_color)),
-                    (self.is_flippable_line_directly_below(row, column, board, opposite_color, current_color)),
-                    (self.is_flippable_line_lower_left(row, column, board, opposite_color, current_color)),
-                    (self.is_flippable_line_left(row, column, board, opposite_color, current_color)),
-                    (self.is_flippable_line_upper_left(row, column, board, opposite_color, current_color))
-                ])
-    
-    def is_game_over(self, row, column, board, opposite_color, current_color) -> bool:
-        pass
+        return any(
+            [
+                (
+                    self.is_flippable_line_directly_above(
+                        row, column, board, opposite_color, current_color
+                    )
+                ),
+                (
+                    self.is_flippable_line_upper_right(
+                        row, column, board, opposite_color, current_color
+                    )
+                ),
+                (
+                    self.is_flippable_line_right(
+                        row, column, board, opposite_color, current_color
+                    )
+                ),
+                (
+                    self.is_flippable_line_lower_right(
+                        row, column, board, opposite_color, current_color
+                    )
+                ),
+                (
+                    self.is_flippable_line_directly_below(
+                        row, column, board, opposite_color, current_color
+                    )
+                ),
+                (
+                    self.is_flippable_line_lower_left(
+                        row, column, board, opposite_color, current_color
+                    )
+                ),
+                (
+                    self.is_flippable_line_left(
+                        row, column, board, opposite_color, current_color
+                    )
+                ),
+                (
+                    self.is_flippable_line_upper_left(
+                        row, column, board, opposite_color, current_color
+                    )
+                ),
+            ]
+        )
 
     def is_placeable(self, board) -> bool:
         rows = board.row
@@ -141,6 +166,59 @@ class Rule:
             blank_places += rows[i].count("-")
         return blank_places == 0
 
-        
+    def is_non_capturable(
+        self, row, column, board, opposite_color, current_color
+    ) -> bool:
+        return all(
+            [
+                (
+                    self.is_flippable_line_directly_above(
+                        row, column, board, opposite_color, current_color
+                    )
+                ),
+                (
+                    self.is_flippable_line_upper_right(
+                        row, column, board, opposite_color, current_color
+                    )
+                ),
+                (
+                    self.is_flippable_line_right(
+                        row, column, board, opposite_color, current_color
+                    )
+                ),
+                (
+                    self.is_flippable_line_lower_right(
+                        row, column, board, opposite_color, current_color
+                    )
+                ),
+                (
+                    self.is_flippable_line_directly_below(
+                        row, column, board, opposite_color, current_color
+                    )
+                ),
+                (
+                    self.is_flippable_line_lower_left(
+                        row, column, board, opposite_color, current_color
+                    )
+                ),
+                (
+                    self.is_flippable_line_left(
+                        row, column, board, opposite_color, current_color
+                    )
+                ),
+                (
+                    self.is_flippable_line_upper_left(
+                        row, column, board, opposite_color, current_color
+                    )
+                ),
+            ]
+        )
 
-
+    def count_stones(self, board) -> int:
+        rows = board.row
+        count_black_discs = 0
+        count_white_discs = 0
+        for i in range(len(rows)):
+            count_black_discs += rows[i].count("⚫️")
+            count_white_discs += rows[i].count("⚪️")
+        return count_black_discs, count_white_discs

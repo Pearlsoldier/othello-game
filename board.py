@@ -7,7 +7,7 @@ bd = Disc("⚫️")
 bd.color
 
 uppercase_letter = list(string.ascii_uppercase)
-line = uppercase_letter[0:3]
+line = uppercase_letter[0:4]
 
 
 class Board:
@@ -41,18 +41,14 @@ class Board:
         self.row[0] = zero_line
         self.row[4] = zero_line
 
-        self.row[1][1] = bd.color
-        self.row[1][2] = bd.color
-        self.row[1][3] = wd.color
+        # self.row[4][4] = bd.color
+        # self.row[5][5] = bd.color
+        # self.row[4][5] = wd.color
+        # self.row[5][4] = wd.color
 
+ 
+        self.row[1][2] = wd.color
+        self.row[1][3] = bd.color
 
-        self.row[2][1] = bd.color
         self.row[2][2] = bd.color
         self.row[2][3] = wd.color
-        self.row[3][1] = bd.color
-        self.row[3][2] = bd.color
-        self.row[3][3] = wd.color
-
-        self.row[4][1] = bd.color
-        self.row[4][2] = bd.color
-        self.row[4][3] = wd.color
