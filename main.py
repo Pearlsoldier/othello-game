@@ -15,6 +15,8 @@ def main():
     rules = Rule()
 
     print("オセロを始めます。")
+    is_blank_place = rules.is_placeable(board)
+    print(is_blank_place)
     print("======================")
     for i in range(len(rows)):
         print(*rows[i])

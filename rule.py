@@ -1,3 +1,5 @@
+from board import Board
+
 class Rule:
     def __init__(self):
         """
@@ -128,3 +130,17 @@ class Rule:
                     (self.is_flippable_line_left(row, column, board, opposite_color, current_color)),
                     (self.is_flippable_line_upper_left(row, column, board, opposite_color, current_color))
                 ])
+    
+    def is_game_over(self, row, column, board, opposite_color, current_color) -> bool:
+        pass
+
+    def is_placeable(self, board) -> bool:
+        rows = board.row
+        blank_places = 0
+        for i in range(len(rows)):
+            blank_places += rows[i].count("-")
+        return blank_places == 0
+
+        
+
+
