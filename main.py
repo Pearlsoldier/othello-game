@@ -65,25 +65,19 @@ def main():
                 row, column, board, opposite_color, current_color
             ):
                 print(f"❌手 {column, row} は石を置けません❌")
-                game_over = rules.is_capturable(
-                row, column, board, opposite_color, current_color
-                )
-                flippable = rules.is_flippable_line_upper_left(row, column, board, opposite_color, current_color)
-                print(f"flippable : {flippable}") 
-                print(f"game :{game_over}")
-                if game_over:
-                    break
-
                 print("もう一度入力してください！！")
                 for i in range(len(rows)):
                     print(*rows[i])
                 print("======================")
                 column, row = situ.put_disc(input())
+                game_over = rules.is_capturable(
+                row, column, board, opposite_color, current_color
+                )
+                if game_over:
+                    break
                 print(not rules.is_legal_cell(
                 row, column, board, opposite_color, current_color
             ))
-            if game_over:
-                    break
             print(f"🙆手 {column, row} は有効です🙆")
             refreshed_board = player.move(
                 column=column, row=row, current_color=current_color, board=board
@@ -97,11 +91,6 @@ def main():
                 opposite_color=opposite_color,
                 board=board,
             )
-            game_over = rules.is_capturable(
-                row, column, board, opposite_color, current_color
-            )
-            if game_over:
-                break
             situ.reflesh_board(refreshed_board)
             for i in range(len(rows)):
                 print(*rows[i])
