@@ -32,6 +32,9 @@ def main():
             print(f"後手,{current_color}。")
 
         column, row = situ.put_disc(input())
+        print(f"pass :{column, row}")
+        if column == "0":
+            continue
         if rules.is_legal_cell(row, column, board, opposite_color, current_color):
             game_over = rules.is_capturable(
                 row, column, board, opposite_color, current_color

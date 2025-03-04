@@ -25,6 +25,10 @@ class Situation:
     def put_disc(self, cell):
         self.disc_move = cell
         splitted_row = self.disc_move.split()
+        if splitted_row[0] == "0":
+            row = splitted_row[0]
+            column = splitted_row[1]
+            return row, column
         str_x = splitted_row[0]
         row = self.alp_num_map[str_x]
         str_y = splitted_row[1]

@@ -222,3 +222,6 @@ class Rule:
             count_black_discs += rows[i].count("⚫️")
             count_white_discs += rows[i].count("⚪️")
         return count_black_discs, count_white_discs
+
+    def pass_turn(self, cell):
+        pass
