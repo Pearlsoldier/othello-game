@@ -33,9 +33,10 @@ def main():
 
         column, row = situ.put_disc(input())
         if rules.is_legal_cell(row, column, board, opposite_color, current_color):
-            game_over = rules.is_non_capturable(
+            game_over = rules.is_capturable(
                 row, column, board, opposite_color, current_color
             )
+            print(f"game :{game_over}")
             if game_over:
                 break
             refreshed_board = player.move(
@@ -61,9 +62,12 @@ def main():
                 row, column, board, opposite_color, current_color
             ):
                 print(f"❌手 {column, row} は石を置けません❌")
-                game_over = rules.is_non_capturable(
+                game_over = rules.is_capturable(
                 row, column, board, opposite_color, current_color
                 )
+                flippable = rules.is_flippable_line_upper_left(row, column, board, opposite_color, current_color)
+                print(f"flippable : {flippable}") 
+                print(f"game :{game_over}")
                 if game_over:
                     break
 
@@ -75,7 +79,8 @@ def main():
                 print(not rules.is_legal_cell(
                 row, column, board, opposite_color, current_color
             ))
-
+            if game_over:
+                    break
             print(f"🙆手 {column, row} は有効です🙆")
             refreshed_board = player.move(
                 column=column, row=row, current_color=current_color, board=board
@@ -89,7 +94,7 @@ def main():
                 opposite_color=opposite_color,
                 board=board,
             )
-            game_over = rules.is_non_capturable(
+            game_over = rules.is_capturable(
                 row, column, board, opposite_color, current_color
             )
             if game_over:

@@ -166,48 +166,48 @@ class Rule:
             blank_places += rows[i].count("-")
         return blank_places == 0
 
-    def is_non_capturable(
+    def is_capturable(
         self, row, column, board, opposite_color, current_color
     ) -> bool:
         return all(
             [
                 (
-                    self.is_flippable_line_directly_above(
+                    not self.is_flippable_line_directly_above(
                         row, column, board, opposite_color, current_color
                     )
                 ),
                 (
-                    self.is_flippable_line_upper_right(
+                     not self.is_flippable_line_upper_right(
                         row, column, board, opposite_color, current_color
                     )
                 ),
                 (
-                    self.is_flippable_line_right(
+                    not self.is_flippable_line_right(
                         row, column, board, opposite_color, current_color
                     )
                 ),
                 (
-                    self.is_flippable_line_lower_right(
+                    not self.is_flippable_line_lower_right(
                         row, column, board, opposite_color, current_color
                     )
                 ),
                 (
-                    self.is_flippable_line_directly_below(
+                    not self.is_flippable_line_directly_below(
                         row, column, board, opposite_color, current_color
                     )
                 ),
                 (
-                    self.is_flippable_line_lower_left(
+                    not self.is_flippable_line_lower_left(
                         row, column, board, opposite_color, current_color
                     )
                 ),
                 (
-                    self.is_flippable_line_left(
+                    not self.is_flippable_line_left(
                         row, column, board, opposite_color, current_color
                     )
                 ),
                 (
-                    self.is_flippable_line_upper_left(
+                    not self.is_flippable_line_upper_left(
                         row, column, board, opposite_color, current_color
                     )
                 ),
